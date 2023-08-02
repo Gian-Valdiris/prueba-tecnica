@@ -1,0 +1,64 @@
+
+<h4>
+  Total cupo compras <b> {{purchaseQuota}}</b>
+</h4>
+
+<h2>{{messagePurchase}}</h2>
+
+<div class="product-container">
+  <div *ngFor="let p of products" class="container-product">
+    <p>{{ p.name }}</p>
+    <p>{{ p.price }}</p>
+    <p>Stock: {{ p.stock }}</p>
+    <div>
+      <button (click)="decreaseQuantity(p)">-</button>
+      <input type="number" [(ngModel)]="p.quantity" min="0" max="{{ p.stock }}" disabled>
+      <button (click)="increaseQuantity(p)">+</button>
+      <button (click)="addToCart(p)" [disabled]="p.quantity === 0">Agregar al carrito</button>
+    </div>
+  </div>
+</div>
+
+<div class="cart-container">
+  <h2>Carrito de compras</h2>
+  <h4>{{messageCa}}</h4>
+  <div *ngFor="let item of cartItems" class="cart-item">
+    <p>Producto <b>{{ item.name }}</b></p>
+    <p>Cantidad: {{ item.quantity }}</p>
+    <p>Precio total: {{ item.quantity * item.price }} $</p>
+  </div>
+  <button (click)="checkout()" [disabled]="cartItems.length === 0">Finalizar compra</button>
+</div>
+
+
+<br>
+<h2>
+  productos mas vendidos 
+</h2>
+<div class="product-container">
+  <div *ngFor="let p of products_sold" class="container-product">
+    <p>{{ p.name }}</p>
+    <p> Vendidos : {{ p.total_sold }}</p>
+    <div>
+    </div>
+  </div>
+</div>
+
+<h3>
+  Buscar productos 
+</h3>
+<input type="text" placeholder="nombre de producto" [(ngModel)]="nameP" > 
+<button (click)="searchProduct()">Buscar </button>
+
+
+
+<div class="product-container">
+  <div *ngFor="let p of searchProducts" class="container-product">
+    <p>{{ p.name }}</p>
+    <p> total vendidos : {{ p.total_sold }}</p>
+    <p> price : {{p.price}} </p>
+    <p> stock : {{p.stock}} </p>
+    <div>
+    </div>
+  </div>
+</div>
